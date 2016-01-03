@@ -1,4 +1,4 @@
-FROM daocloud.io/someetinc/api-base:docker-base.0.0.1
+FROM daocloud.io/someetinc/openapi-base:master-init
 
 # Copy the working dir to the image's web root
 COPY . /var/www/html
