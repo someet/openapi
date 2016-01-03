@@ -1,0 +1,14 @@
+config/local.php
+config/console-local.php
+/docker-compose.yml
+/vendor/
+.env
+.idea
+/apidoc
+
+*.swp
+.vimrc
+.DS_Store
+/views/
+/webback/
+/viewsback/
