@@ -1,9 +1,12 @@
 <?php
 namespace app\controllers;
 
-use yii\rest\ActiveController;
+use someet\common\models\Activity;
+use yii\data\ActiveDataProvider;
+use yii\rest\Controller;
+use yii\data\Pagination;
 
-class ActivityController extends ActiveController
+class ActivityController extends Controller
 {
    public $modelClass='someet\common\models\Activity';
 
@@ -14,5 +17,28 @@ class ActivityController extends ActiveController
       unset($actions['delete'], $actions['create']);
 
       return $actions;
+   }
+
+   /**
+    * 活动列表
+    * @return ActiveDataProvider
+    */
+   public function actionIndex()
+   {
+      $data = Activity::find()->where(['status' => Activity::STATUS_RELEASE]);
+      $pages = new Pagination(['totalCount' => $data->count()]);
+      return new ActiveDataProvider([
+          'query' => $data->offset($pages->offset)->limit($pages->limit),
+      ]);
+   }
+
+   /**
+    * 活动详情
+    * @param $id 活动ID
+    * @return null|static
+    */
+   public function actionView($id)
+   {
+      return Activity::findOne($id);
    }
 }
