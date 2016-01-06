@@ -28,7 +28,7 @@ class ActivityController extends Controller
       $data = Activity::find()->where(['status' => Activity::STATUS_RELEASE]);
       $pages = new Pagination(['totalCount' => $data->count()]);
       return new ActiveDataProvider([
-          'query' => $data->offset($pages->offset)->limit($pages->limit),
+          'query' => $data->offset($pages->offset)->limit($pages->limit)->orderBy(['id' => SORT_DESC]),
       ]);
    }
 
@@ -40,5 +40,10 @@ class ActivityController extends Controller
    public function actionView($id)
    {
       return Activity::findOne($id);
+   }
+
+   public function actionCreate()
+   {
+
    }
 }
